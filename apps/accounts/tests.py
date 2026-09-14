@@ -38,9 +38,7 @@ class UserEmailTests(TestCase):
         self.assertEqual(user.email, "dup@exemplo.com")
 
     def test_manager_normaliza_email(self):
-        user = User.objects.create_user(
-            email="Outro@Exemplo.COM", password=SENHA, nome_completo="Beltrano"
-        )
+        user = User.objects.create_user(email="Outro@Exemplo.COM", password=SENHA, nome_completo="Beltrano")
         self.assertEqual(user.email, "outro@exemplo.com")
 
     def test_caixa_diferente_nao_cria_segunda_conta(self):
@@ -54,9 +52,7 @@ class UserEmailTests(TestCase):
 
 class UserManagerTests(TestCase):
     def test_create_superuser_define_flags(self):
-        user = User.objects.create_superuser(
-            email="root@exemplo.com", password=SENHA, nome_completo="Root"
-        )
+        user = User.objects.create_superuser(email="root@exemplo.com", password=SENHA, nome_completo="Root")
         self.assertTrue(user.is_staff)
         self.assertTrue(user.is_superuser)
 

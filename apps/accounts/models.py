@@ -1,3 +1,7 @@
+from __future__ import annotations
+
+from typing import Any
+
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
@@ -7,7 +11,7 @@ class UserManager(BaseUserManager):
 
     use_in_migrations = True
 
-    def _create_user(self, email: str, password: str | None, **extra):
+    def _create_user(self, email: str, password: str | None, **extra: Any) -> User:
         if not email:
             raise ValueError("E-mail é obrigatório.")
         email = self.normalize_email(email).lower()
@@ -16,12 +20,12 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
         return user
 
-    def create_user(self, email: str, password: str | None = None, **extra):
+    def create_user(self, email: str, password: str | None = None, **extra: Any) -> User:
         extra.setdefault("is_staff", False)
         extra.setdefault("is_superuser", False)
         return self._create_user(email, password, **extra)
 
-    def create_superuser(self, email: str, password: str | None = None, **extra):
+    def create_superuser(self, email: str, password: str | None = None, **extra: Any) -> User:
         extra.setdefault("is_staff", True)
         extra.setdefault("is_superuser", True)
         if extra.get("is_staff") is not True:
@@ -48,12 +52,12 @@ class User(AbstractUser):
         verbose_name = "usuário"
         verbose_name_plural = "usuários"
 
-    def save(self, *args, **kwargs):
+    def save(self, *args: Any, **kwargs: Any) -> None:
         # unique=True no Postgres diferencia maiusculas, entao normalizar so no
         # manager deixaria passar duplicata criada por ModelForm (admin) ou save()
         # direto. Normalizar aqui cobre todos os caminhos do ORM.
         self.email = UserManager.normalize_email(self.email).lower()
-        return super().save(*args, **kwargs)
+        super().save(*args, **kwargs)
 
     def get_full_name(self) -> str:
         return self.nome_completo
@@ -73,9 +77,7 @@ class Papel(models.TextChoices):
 
 class Membership(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="memberships")
-    empresa = models.ForeignKey(
-        "empresas.Empresa", on_delete=models.PROTECT, related_name="memberships"
-    )
+    empresa = models.ForeignKey("empresas.Empresa", on_delete=models.PROTECT, related_name="memberships")
     papel = models.CharField(max_length=20, choices=Papel.choices)
     ativo = models.BooleanField(default=True)
     criado_em = models.DateTimeField(auto_now_add=True)
@@ -84,9 +86,7 @@ class Membership(models.Model):
         verbose_name = "vínculo"
         verbose_name_plural = "vínculos"
         constraints = [
-            models.UniqueConstraint(
-                fields=["user", "empresa"], name="uniq_membership_user_empresa"
-            ),
+            models.UniqueConstraint(fields=["user", "empresa"], name="uniq_membership_user_empresa"),
         ]
         indexes = [
             models.Index(fields=["user", "ativo"], name="idx_membership_user_ativo"),
