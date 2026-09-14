@@ -6,7 +6,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 Sistema de **análise de crédito multiempresa** em Django 6.1 / Python 3.14 / PostgreSQL 18, gerenciado com `uv`.
 
-O diretório do repositório é `imperio`, mas o pacote se chama `credito` em `pyproject.toml` e no `name:` do `compose.yaml` — por isso os containers são `credito-web-1` / `credito-db-1`.
+O nome `imperio` é usado de ponta a ponta: repositório, diretório, `name` do `pyproject.toml`, `name:` do `compose.yaml` (que dá os containers `imperio-web-1` / `imperio-db-1`) e `POSTGRES_DB`/`POSTGRES_USER`. Trocar o `name:` do `compose.yaml` renomeia o volume do Postgres junto (`<name>_pgdata`), o que na prática zera o banco local — depois é só `migrate`.
 
 ## Executando comandos
 

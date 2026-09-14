@@ -134,45 +134,6 @@ wheels = [
 ]
 
 [[package]]
-name = "credito"
-version = "0.1.0"
-source = { virtual = "." }
-dependencies = [
-    { name = "argon2-cffi" },
-    { name = "django" },
-    { name = "django-environ" },
-    { name = "gunicorn" },
-    { name = "psycopg", extra = ["binary", "pool"] },
-    { name = "whitenoise" },
-]
-
-[package.dev-dependencies]
-dev = [
-    { name = "django-debug-toolbar" },
-    { name = "pytest" },
-    { name = "pytest-django" },
-    { name = "ruff" },
-]
-
-[package.metadata]
-requires-dist = [
-    { name = "argon2-cffi", specifier = ">=25.1" },
-    { name = "django", specifier = ">=6.1,<6.2" },
-    { name = "django-environ", specifier = ">=0.12" },
-    { name = "gunicorn", specifier = ">=23.0" },
-    { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2" },
-    { name = "whitenoise", specifier = ">=6.9" },
-]
-
-[package.metadata.requires-dev]
-dev = [
-    { name = "django-debug-toolbar", specifier = ">=6.0" },
-    { name = "pytest", specifier = ">=8.4" },
-    { name = "pytest-django", specifier = ">=4.11" },
-    { name = "ruff", specifier = ">=0.14" },
-]
-
-[[package]]
 name = "django"
 version = "6.1.1"
 source = { registry = "https://pypi.org/simple" }
@@ -215,6 +176,45 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/d9/8a/e4ef6ee11701b6cd64702848415ffb69eeff85cb388a3c6c7fe86f22f3f8/gunicorn-26.2.0.tar.gz", hash = "sha256:62b864895d9ebff0b2f9867ba04fe811c93121596540830c9c916d0769668447", size = 787921, upload-time = "2026-08-24T15:05:59.3Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/fe/85/7522a52e5e2f42faf1a129113ab63e548c42e103e9af395b7bfe65e403e2/gunicorn-26.2.0-py3-none-any.whl", hash = "sha256:bd249d0b3f7972f7432f0a6b6ff3b3ee2d129f70cd1ff6c09a9dd9e29a2b88e3", size = 228389, upload-time = "2026-08-24T15:05:57.67Z" },
+]
+
+[[package]]
+name = "imperio"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "argon2-cffi" },
+    { name = "django" },
+    { name = "django-environ" },
+    { name = "gunicorn" },
+    { name = "psycopg", extra = ["binary", "pool"] },
+    { name = "whitenoise" },
+]
+
+[package.dev-dependencies]
+dev = [
+    { name = "django-debug-toolbar" },
+    { name = "pytest" },
+    { name = "pytest-django" },
+    { name = "ruff" },
+]
+
+[package.metadata]
+requires-dist = [
+    { name = "argon2-cffi", specifier = ">=25.1" },
+    { name = "django", specifier = ">=6.1,<6.2" },
+    { name = "django-environ", specifier = ">=0.12" },
+    { name = "gunicorn", specifier = ">=23.0" },
+    { name = "psycopg", extras = ["binary", "pool"], specifier = ">=3.2" },
+    { name = "whitenoise", specifier = ">=6.9" },
+]
+
+[package.metadata.requires-dev]
+dev = [
+    { name = "django-debug-toolbar", specifier = ">=6.0" },
+    { name = "pytest", specifier = ">=8.4" },
+    { name = "pytest-django", specifier = ">=4.11" },
+    { name = "ruff", specifier = ">=0.14" },
 ]
 
 [[package]]
