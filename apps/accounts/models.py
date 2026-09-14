@@ -5,6 +5,8 @@ from typing import Any
 from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.db import models
 
+from apps.core.models import UUIDModel
+
 
 class UserManager(BaseUserManager):
     """Manager que usa e-mail como identificador, sem campo username."""
@@ -35,7 +37,7 @@ class UserManager(BaseUserManager):
         return self._create_user(email, password, **extra)
 
 
-class User(AbstractUser):
+class User(AbstractUser, UUIDModel):
     username = None
     first_name = None
     last_name = None

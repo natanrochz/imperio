@@ -1,7 +1,9 @@
 from django.db import models
 
+from apps.core.models import UUIDModel
 
-class Empresa(models.Model):
+
+class Empresa(UUIDModel):
     nome = models.CharField(max_length=150)
     cnpj = models.CharField(max_length=14, unique=True)
     ativa = models.BooleanField(default=True)
