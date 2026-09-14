@@ -36,5 +36,5 @@ select = ["E", "F", "I", "UP", "B", "S", "DTZ", "DJ", "C4", "RUF"]
 ignore = ["S101"]
 
 [tool.ruff.lint.per-file-ignores]
-"*/migrations/*" = ["E501", "RUF012"]
+"*/migrations/*" = ["E501", "I001", "RUF012"]
 "config/settings/*" = ["F403", "F405"]
