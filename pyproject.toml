@@ -25,7 +25,9 @@ package = false
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
 python_files = ["test_*.py", "tests.py"]
-addopts = "--reuse-db --strict-markers"
+# --ds tem precedencia sobre a variavel de ambiente DJANGO_SETTINGS_MODULE, que
+# o compose injeta via env_file e que sobrepunha o DJANGO_SETTINGS_MODULE abaixo.
+addopts = "--ds=config.settings.test --reuse-db --strict-markers"
 
 [tool.ruff]
 line-length = 110
@@ -33,8 +35,10 @@ src = ["."]
 
 [tool.ruff.lint]
 select = ["E", "F", "I", "UP", "B", "S", "DTZ", "DJ", "C4", "RUF"]
-ignore = ["S101"]
+# RUF012 exige ClassVar em atributos de classe mutaveis, o que briga com os
+# idiomas do Django (Meta.ordering/constraints/indexes, ModelAdmin.list_display...).
+ignore = ["S101", "RUF012"]
 
 [tool.ruff.lint.per-file-ignores]
-"*/migrations/*" = ["E501", "I001", "RUF012"]
+"*/migrations/*" = ["E501", "I001"]
 "config/settings/*" = ["F403", "F405"]

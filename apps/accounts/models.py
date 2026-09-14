@@ -48,6 +48,19 @@ class User(AbstractUser):
         verbose_name = "usuário"
         verbose_name_plural = "usuários"
 
+    def save(self, *args, **kwargs):
+        # unique=True no Postgres diferencia maiusculas, entao normalizar so no
+        # manager deixaria passar duplicata criada por ModelForm (admin) ou save()
+        # direto. Normalizar aqui cobre todos os caminhos do ORM.
+        self.email = UserManager.normalize_email(self.email).lower()
+        return super().save(*args, **kwargs)
+
+    def get_full_name(self) -> str:
+        return self.nome_completo
+
+    def get_short_name(self) -> str:
+        return self.nome_completo.split()[0] if self.nome_completo else ""
+
     def __str__(self) -> str:
         return self.email
 
