@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+
+# Django
+*.sqlite3
+/staticfiles/
+/media/
+
+# Ambiente e segredos
+.env
+*.pem
+
+# Ferramentas
+.pytest_cache/
+.ruff_cache/
+htmlcov/
+.coverage
+
+# Editor / SO
+.vscode/*
+!.vscode/launch.json
+!.vscode/settings.json
+.idea/
+.DS_Store
