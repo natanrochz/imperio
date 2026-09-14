@@ -24,7 +24,7 @@ package = false
 
 [tool.pytest.ini_options]
 DJANGO_SETTINGS_MODULE = "config.settings.test"
-python_files = ["test_*.py", "tests.py"]
+python_files = ["test_*.py"]
 # --ds tem precedencia sobre a variavel de ambiente DJANGO_SETTINGS_MODULE, que
 # o compose injeta via env_file e que sobrepunha o DJANGO_SETTINGS_MODULE abaixo.
 addopts = "--ds=config.settings.test --reuse-db --strict-markers"
