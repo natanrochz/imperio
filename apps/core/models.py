@@ -16,3 +16,18 @@ class UUIDModel(models.Model):
 
     class Meta:
         abstract = True
+
+
+class TimestampedModel(models.Model):
+    """Carimbo de criação e atualização.
+
+    `atualizado_em` usa `auto_now`, que o Django aplica no `save()` do model —
+    `QuerySet.update()` **não** dispara. Quem usa `update()` (a trava otimista de
+    `Analise`, por exemplo) precisa passar `atualizado_em` explicitamente.
+    """
+
+    criado_em = models.DateTimeField("criado em", auto_now_add=True)
+    atualizado_em = models.DateTimeField("atualizado em", auto_now=True)
+
+    class Meta:
+        abstract = True
