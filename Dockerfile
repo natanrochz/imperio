@@ -9,7 +9,8 @@ ENV PYTHONUNBUFFERED=1 \
     UV_PYTHON_DOWNLOADS=never \
     PATH="/opt/venv/bin:$PATH"
 
-COPY --from=ghcr.io/astral-sh/uv:latest /uv /usr/local/bin/uv
+# Versao fixa: :latest tornaria o build nao reprodutivel, contradizendo o --frozen abaixo.
+COPY --from=ghcr.io/astral-sh/uv:0.12.13 /uv /usr/local/bin/uv
 
 ARG UID=1000
 ARG GID=1000

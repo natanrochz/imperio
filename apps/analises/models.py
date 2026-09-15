@@ -22,7 +22,13 @@ class StatusAnalise(TimestampedModel):
     Sem `uuid`: é configuração, não vira rota própria — mesmo critério de `Membership`.
     """
 
-    empresa = models.ForeignKey("empresas.Empresa", on_delete=models.PROTECT, related_name="status_analise")
+    empresa = models.ForeignKey(
+        "empresas.Empresa",
+        on_delete=models.PROTECT,
+        related_name="status_analise",
+        # Coberto pelo prefixo de idx_status_empresa_categoria e uniq_status_empresa_nome.
+        db_index=False,
+    )
     nome = models.CharField("nome", max_length=50)
     categoria = models.CharField("categoria", max_length=20, choices=CategoriaStatus.choices)
     ordem = models.PositiveSmallIntegerField("ordem", default=0)
@@ -47,7 +53,13 @@ class Analise(UUIDModel, TimestampedModel):
     """Uma análise de crédito. `empresa` é denormalizada de `Pessoa` para permitir
     índice composto com `empresa_id` como prefixo e RLS futuro sem remodelar."""
 
-    empresa = models.ForeignKey("empresas.Empresa", on_delete=models.PROTECT, related_name="analises")
+    empresa = models.ForeignKey(
+        "empresas.Empresa",
+        on_delete=models.PROTECT,
+        related_name="analises",
+        # Coberto pelo prefixo dos tres indices compostos que comecam em empresa_id.
+        db_index=False,
+    )
     pessoa = models.ForeignKey("pessoas.Pessoa", on_delete=models.PROTECT, related_name="analises")
     consorciorista = models.ForeignKey(
         settings.AUTH_USER_MODEL, on_delete=models.PROTECT, related_name="analises_encaminhadas"

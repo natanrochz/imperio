@@ -13,7 +13,13 @@ class Pessoa(UUIDModel, TimestampedModel):
     o primeiro perca o histórico.
     """
 
-    empresa = models.ForeignKey("empresas.Empresa", on_delete=models.PROTECT, related_name="pessoas")
+    empresa = models.ForeignKey(
+        "empresas.Empresa",
+        on_delete=models.PROTECT,
+        related_name="pessoas",
+        # Coberto pelo prefixo de idx_pessoa_empresa_nome e uniq_pessoa_empresa_cpf.
+        db_index=False,
+    )
     nome_completo = models.CharField("nome completo", max_length=150)
     cpf = models.CharField("CPF", max_length=11)
     data_nascimento = models.DateField("data de nascimento")
